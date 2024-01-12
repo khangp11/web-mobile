@@ -37,8 +37,8 @@ const Profile = () => {
             </header> <br /><br /><br /> <br /><br />
 
             <div className='shadow-2xl m-2'>
-                <div className='flex ml-2 mr-2 border-b-2 border-gray-500'>
-                    <div className='flex-1 basis-1/2'>
+                <div className='flex ml-2 mr-2 border-b-2 border-gray-500 shadow-2xl bg-white items-center h-16'>
+                    <div className='flex-1 basis-1/2 ml-2'>
                         <p className=""><b>Payment Cards</b></p>
                         <p className="">Add a credit or debit card</p>
                     </div>
@@ -48,8 +48,8 @@ const Profile = () => {
                         </svg>
                     </div>
                 </div>
-                <div className='flex ml-2 mr-2 border-b-2 border-gray-500'>
-                    <div className='flex-1 basis-1/2'>
+                <div className='flex ml-2 mr-2 border-b-2 border-gray-500 shadow-2xl bg-white items-center h-16'>
+                    <div className='flex-1 basis-1/2 ml-2'>
                         <p className=""><b>Payment Cards</b></p>
                         <p className="">Add a credit or debit card</p>
                     </div>
@@ -59,8 +59,8 @@ const Profile = () => {
                         </svg>
                     </div>
                 </div>
-                <div className='flex ml-2 mr-2 border-b-2 border-gray-500'>
-                    <div className='flex-1 basis-1/2'>
+                <div className='flex ml-2 mr-2 border-b-2 border-gray-500 shadow-2xl bg-white items-center h-16'>
+                    <div className='flex-1 basis-1/2 ml-2'>
                         <p className=""><b>Payment Cards</b></p>
                         <p className="">Add a credit or debit card</p>
                     </div>
@@ -71,7 +71,7 @@ const Profile = () => {
                     </div>
                 </div>
                 {/* phan2 */}
-                <div className='flex ml-2 mr-2 border-b-2 border-gray-500'>
+                <div className='flex ml-2 mr-2 border-b-2 border-gray-500 bg-white h-16'>
                     <div className='flex items-center space-x-6 m-2'>
                         <button className='w-10 h-10 rounded-full bg-lime-600'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 m-2">
@@ -88,7 +88,7 @@ const Profile = () => {
                         </svg>
                     </div>
                 </div>
-                <div className='flex ml-2 mr-2 border-b-2 border-gray-500'>
+                <div className='flex ml-2 mr-2 border-b-2 border-gray-500 bg-white h-16'>
                     <div className='flex items-center space-x-6 m-2'>
                         <button className='w-10 h-10 rounded-full bg-lime-600'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 m-2">
@@ -105,7 +105,7 @@ const Profile = () => {
                         </svg>
                     </div>
                 </div>
-                <div className='flex ml-2 mr-2 border-b-2 border-gray-500'>
+                <div className='flex ml-2 mr-2 border-b-2 border-gray-500 bg-white h-16'>
                     <div className='flex items-center space-x-6 m-2'>
                         <button className='w-10 h-10 rounded-full bg-lime-600'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 m-2">
@@ -122,7 +122,7 @@ const Profile = () => {
                         </svg>
                     </div>
                 </div>
-                <div className='flex ml-2 mr-2 border-b-2 border-gray-500'>
+                <div className='flex ml-2 mr-2 border-b-2 border-gray-500 bg-white h-16'>
                     <div className='flex items-center space-x-6 m-2'>
                         <button className='w-10 h-10 rounded-full bg-lime-600'>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 m-2">
@@ -139,7 +139,7 @@ const Profile = () => {
                         </svg>
                     </div>
                 </div>
-            </div><br />
+            </div><br /><br /><br />
 
 
 

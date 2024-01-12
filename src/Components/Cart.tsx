@@ -1,15 +1,15 @@
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
+import { Link } from "react-router-dom";
 const Cart = () => {
-
-
     const onclickTru = () => {
         alert("dau trừ")
     }
     const onclickCong = () => {
         alert("dau Cong")
     }
+
     return (
         <>
             <header>
@@ -21,7 +21,7 @@ const Cart = () => {
                             </svg>
                             <p className='flex-1 text-xl mt-2 ml-1'>Order</p>
                             <div className="relative flex mt-2">
-                                <p>Close</p>
+                                <Link to={'/'}>Close</Link>
                             </div>
                         </div>
                         <div className='shadow-2xl rounded-lg w-11/12 absolute mt-12 ml-4 bg-white h-16'>
