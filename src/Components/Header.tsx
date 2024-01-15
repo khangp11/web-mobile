@@ -1,10 +1,23 @@
 import React from 'react';
 import { useState, useEffect, useRef, useCallback } from 'react';
 
+interface SearchInputProps { }
+
+interface Suggestion {
+    image: string;
+    name: string;
+    category: string;
+}
+
 const Header = () => {
     const [isNavVisible, setNavVisible] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);
     const [isFilterVisible, setFilterVisible] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const suggestionsRef = useRef<HTMLUListElement>(null);
+    const [isInputVisible, setInputVisible] = useState(false);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -46,9 +59,73 @@ const Header = () => {
         setFilterVisible(false);
     }
 
+
+    const handleSearchClick = () => {
+        setSuggestions([
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWvrEUp-CuFJwKEA4Iswu4ZJKPkdloGyya9w&usqp=CAU',
+                name: 'Product 1',
+                category: 'Category A',
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY4LG7AueZsFBJDSPgebX7P2IStTLYEGPbFg&usqp=CAU',
+                name: 'Product 2',
+                category: 'Category B',
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcl38q_ee8SLEEpIlCwj2GDcxfPVJjJ1ro7Q&usqp=CAU',
+                name: 'Product 3',
+                category: 'Category C',
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcl38q_ee8SLEEpIlCwj2GDcxfPVJjJ1ro7Q&usqp=CAU',
+                name: 'Product 4',
+                category: 'Category d',
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcl38q_ee8SLEEpIlCwj2GDcxfPVJjJ1ro7Q&usqp=CAU',
+                name: 'Product 5',
+                category: 'Category e',
+            },
+        ]);
+        setInputVisible(true)
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+        setSuggestions([]);
+    };
+
+    const handleSuggestionClick = (suggestion: Suggestion) => {
+        setSearchTerm(suggestion.name);
+        setSuggestions([]);
+        setInputVisible(false)
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                inputRef.current &&
+                !inputRef.current.contains(event.target as Node) &&
+                !suggestionsRef.current?.contains(event.target as Node)
+            ) {
+                setSuggestions([]);
+                setInputVisible(false)
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [inputRef, suggestionsRef]);
+
     return (
         <>
-            {isNavVisible && <div className="overlay fixed top-0 left-0 w-full h-full bg-black opacity-60 z-10" onClick={toggleNav}></div>}
+            {isNavVisible && <div className="overlay fixed top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>}
+            {isInputVisible && <div className="overlay fixed top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>}
+
             <nav
                 className="absolute flex-no-wrap relative flex w-full justify-between bg-[#FBFBFB] py-2 shadow-md shadow-black/5 bg-orange-700 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4 relative h-24">
                 <div className="flex w-full flex-wrap justify-between px-3 ">
@@ -254,16 +331,19 @@ const Header = () => {
                             </div>
                         )}
                     </div>
-                    <div className="rounded-lg bg-white xl:w-96 absolute mt-11 ml-8 ">
+                    <div className="z-30 rounded-lg bg-white xl:w-96 absolute mt-11 ml-6 ">
                         <div className="relative flex w-80 flex-wrap items-stretch">
                             <input
+                                ref={inputRef}
                                 type="search"
                                 className="relative m-0 block flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 placeholder="Search"
                                 aria-label="Search"
-                                aria-describedby="button-addon2" />
-
-                            {/* <!--Search icon--> */}
+                                aria-describedby="button-addon2"
+                                onClick={handleSearchClick}
+                                value={searchTerm}
+                                onChange={handleInputChange}
+                            />
                             <span
                                 className="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
                                 id="basic-addon2">
@@ -275,14 +355,36 @@ const Header = () => {
                                     <path
                                         fillRule="evenodd"
                                         d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                                        clipRule="evenodd" />
+                                        clipRule="evenodd"
+                                    />
                                 </svg>
                             </span>
                         </div>
+                        {suggestions.length > 0 && (
+                            <ul
+                                ref={suggestionsRef}
+                                className="suggestions absolute mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                {suggestions.map((suggestion, index) => (
+                                    <li
+                                        key={index}
+                                        className="flex gap-3 px-3 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100"
+                                        onClick={() => handleSuggestionClick(suggestion)}>
+                                        <img
+                                            src={suggestion.image}
+                                            alt={suggestion.name}
+                                            className="h-14 w-28 rounded-md object-cover"
+                                        />
+                                        <div>
+                                            <p className="font-medium">{suggestion.name}</p>
+                                            <p className="text-xs text-gray-500">{suggestion.category}</p>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                 </div>
             </nav>
-
         </>
     )
 }
