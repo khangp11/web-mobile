@@ -1,14 +1,55 @@
 import React from 'react'
-import Header from './Header'
-import Footer from './Footer'
 import { Link } from "react-router-dom";
+import { Food } from './Type';
+import { useState, useEffect } from 'react';
+import { localStorageService } from './util/localStorageService';
+
+
+
 const Cart = () => {
-    const onclickTru = () => {
-        alert("dau trừ")
+    const [cartList, setCartList] = useState<Food[]>([])
+
+    const handleIncreaseAmount = (cart: any, quanlity: any) => {
+        localStorageService({ ...cart }, quanlity + 1)
+        console.log({ ...cart })
+        getCart()
     }
-    const onclickCong = () => {
-        alert("dau Cong")
+    const handleDecreaseAmount = (cart: any, quanlity: any, index: number) => {
+        if (quanlity > 1) {
+            localStorageService(cart, quanlity - 1)
+        } else {
+            handleDeleteItem(index);
+        }
+        getCart()
     }
+    const handleDeleteItem = (index: number) => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            const user = JSON.parse(storedUser);
+            const updatedCart = [...user.cart];
+            updatedCart.splice(index, 1);
+            const newUser = { ...user, cart: updatedCart };
+            localStorage.setItem('user', JSON.stringify(newUser));
+            console.log(newUser);
+            getCart();
+        }
+    };
+
+    useEffect(() => {
+        const start = () => {
+            getCart()
+        }
+        start()
+    }, [])
+    const getCart = () => {
+        if (localStorage.getItem('user')) {
+            const user: any = localStorage.getItem('user')
+            const getUser = JSON.parse(user)
+            setCartList(getUser.cart)
+        }
+    }
+    console.log('123', cartList);
+
 
     return (
         <>
@@ -39,84 +80,29 @@ const Cart = () => {
                 </div>
             </header> <br /><br /><br />
 
-            <div className='shadow-2xl border-2 m-1 bg-white'>
-                <div className="box-border w-82 p-4 border-4 m-0 flex items-center">
-                    <p className="flex-1">Sản phẩm thứ nhất</p>
-                    <button onClick={onclickCong}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                    </button>
-                    <input type="text" value={2} className="w-7 px-2 py-1" />
-                    <button onClick={onclickTru}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-                        </svg>
-                    </button>
-                    <p className="text-gray-500 mb-0 float-right ml-4 ">20$</p>
-                </div>
+            {cartList && cartList?.map((cart, index) => {
+                return (
+                    <div className='shadow-2xl border-2 m-1 bg-white'>
+                        <div className="box-border w-82 p-4 border-4 m-0 flex items-center">
+                            <p className="flex-1">{cart.food_name}</p>
+                            <button onClick={() => handleIncreaseAmount(cart, cart.quantity)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                            </button>
+                            <input type="text items-center" value={cart.quantity} className="w-10 px-2 py-1" />
+                            <button onClick={() => handleDecreaseAmount(cart, cart.quantity, index)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+                                </svg>
+                            </button>
+                            <p className="text-gray-500 mb-0 float-right ml-4 ">{cart.price}$</p>
+                            <button className='ml-2' onClick={() => { handleDeleteItem(index) }}>X</button>
+                        </div>
+                    </div>
+                )
+            })};
 
-                <div className="box-border w-82 p-4 border-4 m-0 flex items-center">
-                    <p className="flex-1">Sản phẩm thứ hai</p>
-                    <button onClick={onclickCong}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                    </button>
-                    <input type="text" value={2} className="w-7 px-2 py-1" />
-                    <button onClick={onclickTru}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-                        </svg>
-                    </button>
-                    <p className="text-gray-500 mb-0 float-right ml-4 ">20$</p>
-                </div>
-                <div className="box-border w-82 p-4 border-4 m-0 flex items-center">
-                    <p className="flex-1">Sản phẩm thứ ba</p>
-                    <button onClick={onclickCong}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                    </button>
-                    <input type="text" value={2} className="w-7 px-2 py-1" />
-                    <button onClick={onclickTru}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-                        </svg>
-                    </button>
-                    <p className="text-gray-500 mb-0 float-right ml-4 ">20$</p>
-                </div>
-                <div className="box-border w-82 p-4 border-4 m-0 flex items-center">
-                    <p className="flex-1">Sản phẩm thứ tư</p>
-                    <button onClick={onclickCong}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                    </button>
-                    <input type="text" value={2} className="w-7 px-2 py-1" />
-                    <button onClick={onclickTru}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-                        </svg>
-                    </button>
-                    <p className="text-gray-500 mb-0 float-right ml-4 ">20$</p>
-                </div>
-                <div className="box-border w-82 p-4 border-4 m-0 flex items-center">
-                    <p className="flex-1">Sản phẩm thứ nam</p>
-                    <button onClick={onclickCong}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                    </button>
-                    <input type="text" value={2} className="w-7 px-2 py-1" />
-                    <button onClick={onclickTru}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-                        </svg>
-                    </button>
-                    <p className="text-gray-500 mb-0 float-right ml-4 ">20$</p>
-                </div>
-            </div>
             <div className='shadow-2xl border-1 m-2'>
                 <div className="flex items-center m-2">
                     <input placeholder="Enter promo code" type="text" className="w-80 p-2 border rounded-l focus:outline-none" />

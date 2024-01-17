@@ -5,24 +5,15 @@ import "./styles.css";
 import { Pagination, Navigation } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Food } from './Type';
+import { localStorageService } from './util/localStorageService';
 
-
-interface SwiperSlideProps {
-    food_name: string,
-    quantity: number,
-    description: string,
-    price: any,
-    star: number,
-    image: string,
-    discount: any,
-    category: any,
-}
 interface SwiperSlidesposter {
     image: string,
 }
 
 const SwiperTrending = () => {
-    const [ListFood, setListFood] = useState<SwiperSlideProps[]>([])
+    const [ListFood, setListFood] = useState<Food[]>([])
 
     const [Listposter, setListposter] = useState<SwiperSlidesposter[]>([])
 
@@ -37,6 +28,11 @@ const SwiperTrending = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    const handleAddToCart = (food: Food) => {
+        localStorageService(food, 1)
+    };
+
 
     const data = [
         {
@@ -81,10 +77,10 @@ const SwiperTrending = () => {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                {ListFood.map((item, index) => (
+                {ListFood.map((food) => (
                     <SwiperSlide className="rounded-lg shadow-2xl ml-2 relative ">
                         <div>
-                            <div key={index} className='h-40' >
+                            <div key={food.id} className='h-40' >
                                 <div className='flex absolute'>
                                     <div className='bg-neutral-800 m-2 rounded text-slate-100 text-sm'>
                                         <span className='ml-1 mr-1'>Promoted</span>
@@ -101,15 +97,15 @@ const SwiperTrending = () => {
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 m-1">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
                                             </svg>
-                                            <samp className='mt-1'>{item.star}(300+)</samp>
+                                            <samp className='mt-1'>{food.star}(300+)</samp>
                                         </div>
                                     </div>
                                 </div>
-                                <img style={{ width: '100%' }} src={`http://res.cloudinary.com/dlxwm5pax/image/upload/v1700937458/${item.image}.jpg`} alt="" />
+                                <img style={{ width: '100%' }} src={`http://res.cloudinary.com/dlxwm5pax/image/upload/v1700937458/${food.image}.jpg`} alt="" />
                             </div>
                             <div className='mr-10'>
-                                <p className='text-base flex m-2'><b>{item.food_name}</b></p>
-                                <p className='text-sm mr-1 flex m-2'>{item.description}</p>
+                                <p className='text-base flex m-2'><b>{food.food_name}</b></p>
+                                <p className='text-sm mr-1 flex m-2'>{food.description}</p>
                                 <div className='flex mt-3 ml-8'>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -117,9 +113,10 @@ const SwiperTrending = () => {
                                     <p className='ml-1 text-sm'>15-30 min</p>
                                     <p className='ml-7 text-sm'>$30 FOR TWO</p>
                                 </div>
-                                <div className='flex m-3 w-20 h-9'>
-                                    <span className='bg-red-700 rounded-lg m-2 text-sm text-slate-50'>OFFER</span>
-                                    <samp className='text-sm m-2'>Oshahan50</samp>
+                                <div className='h-9 grid grid-cols-3 gap-6 content-start m-2'>
+                                    <span className='bg-red-700 rounded-lg text-sm text-slate-50 m-1'>OFFER</span>
+                                    <samp className='text-sm m-1'>Oshahan50</samp>
+                                    <button className='bg-slate-800 text-white rounded-md ml-6' onClick={() => { handleAddToCart(food) }}>Add</button>
                                 </div>
                             </div>
                         </div>
