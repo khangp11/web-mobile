@@ -1,10 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { Food } from './Type';
+import { Food } from '../Type';
 import { useState, useEffect } from 'react';
-import { localStorageService } from './util/localStorageService';
-
-
+import { localStorageService } from '../util/localStorageService';
 
 const Cart = () => {
     const [cartList, setCartList] = useState<Food[]>([])
@@ -34,7 +32,6 @@ const Cart = () => {
             getCart();
         }
     };
-
     useEffect(() => {
         const start = () => {
             getCart()
@@ -152,8 +149,6 @@ const Cart = () => {
                     </span>
                 </div>
             </nav>
-
-
         </>
     )
 }

@@ -121,6 +121,13 @@ const Header = () => {
         };
     }, [inputRef, suggestionsRef]);
 
+
+    const [navsmall, Setnavsmall] = useState(false)
+
+    const sortby = () => {
+        Setnavsmall(!navsmall)
+
+    }
     return (
         <>
             {isNavVisible && <div className="overlay fixed top-0 left-0 w-full h-full bg-black opacity-60 z-10"></div>}
@@ -157,6 +164,7 @@ const Header = () => {
                                                     </button>
                                                 </div>
                                             </div><hr className='mt-2' />
+
                                             <div className='flex w-full flex-wrap items-center justify-between px-3 h-12 bg-gray-100'>
                                                 <p className='text-sx'>Sort by</p>
                                             </div><hr />
@@ -266,13 +274,33 @@ const Header = () => {
                                                 <span className="ms-3 text-xl">Tailwind</span>
                                             </a>
                                         </li>
-                                        <li>
-                                            <button type="button" className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                                        <li >
+                                            <button onClick={sortby} type="button" className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
                                                 </svg>
                                                 <span className="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Intro</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                                </svg>
+
                                             </button>
+                                            {navsmall && (
+                                                <li>
+                                                    <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                                        <span className="flex-1 ms-3 whitespace-nowrap">Landing</span>
+                                                    </a>
+                                                    <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                                        <span className="flex-1 ms-3 whitespace-nowrap">doing</span>
+                                                    </a>
+                                                    <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                                        <span className="flex-1 ms-3 whitespace-nowrap">todo</span>
+                                                    </a>
+                                                    <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                                        <span className="flex-1 ms-3 whitespace-nowrap">done</span>
+                                                    </a>
+                                                </li>
+                                            )}
                                         </li>
                                         <li>
                                             <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -280,7 +308,6 @@ const Header = () => {
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3" />
                                                 </svg>
                                                 <span className="flex-1 ms-3 whitespace-nowrap">Landing</span>
-                                                <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span>
                                             </a>
                                         </li>
                                         <li>
@@ -289,7 +316,6 @@ const Header = () => {
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                                                 </svg>
                                                 <span className="flex-1 ms-3 whitespace-nowrap">Home Page</span>
-                                                <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
                                             </a>
                                         </li>
                                         <li>

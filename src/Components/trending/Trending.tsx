@@ -1,8 +1,8 @@
 import React from 'react'
-import Footer from './Footer'
+import Footer from '../layout/Footer'
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "./styles.css";
+import "../styles.css";
 import { Pagination, Navigation } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef, useCallback } from 'react';

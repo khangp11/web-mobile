@@ -1,8 +1,9 @@
 import React from 'react'
-import Footer from './Footer'
+import Footer from '../layout/Footer'
 import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import SwiperMostpopular from './SwiperMostpopular';
+import SwiperMostpopular from '../swiper/SwiperMostpopular';
+
 const Favorites = () => {
     const [isNavVisible, setNavVisible] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);

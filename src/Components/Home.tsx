@@ -1,10 +1,10 @@
 import React from 'react'
-import Header from './Header'
-import Footer from './Footer';
-import SwiperCategorys from './SwiperCategorys';
-import SwiperTrending from './SwiperTrending';
-import SwiperMostpopular from './SwiperMostpopular';
-import SwiperMostsales from './SwiperMostsales';
+import Header from './layout/Header'
+import Footer from './layout/Footer';
+import SwiperCategorys from './swiper/SwiperCategorys';
+import SwiperTrending from './swiper/SwiperTrending';
+import SwiperMostpopular from './swiper/SwiperMostpopular';
+import SwiperMostsales from './swiper/SwiperMostsales';
 const Home = () => {
 
     return (

@@ -3,27 +3,22 @@ import {
     BrowserRouter,
     Link, NavLink
 } from "react-router-dom";
-import { Food } from './Type';
+import { Food } from '../Type';
+
 const Footer = () => {
     const [scrolled, setScrolled] = useState(false);
     const [cartList, setCartList] = useState<Food[]>([])
 
     useEffect(() => {
         const start = () => {
-            getCart()
-        }
-        start()
-    }, [cartList])
-
-    const getCart = () => {
-        if (localStorage.getItem('user')) {
-            const user: any = localStorage.getItem('user')
-            const getUser = JSON.parse(user)
-            setCartList(getUser.cart)
-        }
-    }
-    console.log('foooter', cartList);
-
+            if (localStorage.getItem('user')) {
+                const user: any = localStorage.getItem('user');
+                const getUser = JSON.parse(user);
+                setCartList(getUser.cart);
+            }
+        };
+        start();
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {

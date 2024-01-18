@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "./styles.css";
+import "../styles.css";
 import { Pagination, Navigation } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Food } from './Type';
-import { localStorageService } from './util/localStorageService';
+import { Food } from '../Type';
+import { localStorageService } from '../util/localStorageService';
 
 interface SwiperSlidesposter {
     image: string,
@@ -104,7 +104,7 @@ const SwiperTrending = () => {
                                 <img style={{ width: '100%' }} src={`http://res.cloudinary.com/dlxwm5pax/image/upload/v1700937458/${food.image}.jpg`} alt="" />
                             </div>
                             <div className='mr-10'>
-                                <p className='text-base flex m-2'><b>{food.food_name}</b></p>
+                                <Link to={'/detail'}><p className='text-base flex m-2'><b>{food.food_name}</b></p></Link>
                                 <p className='text-sm mr-1 flex m-2'>{food.description}</p>
                                 <div className='flex mt-3 ml-8'>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
