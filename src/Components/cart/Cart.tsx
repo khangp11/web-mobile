@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Food } from '../Type';
 import { useState, useEffect } from 'react';
 import { localStorageService } from '../util/localStorageService';
@@ -140,13 +140,13 @@ const Cart = () => {
                     <p className="text-dark-500 mb-0 float-right ml-4 "><b>$1329</b></p>
                 </div>
             </div>
-
             <br /><br />
             <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 bg-lime-600 lg:py-4 h-12 ">
                 <div className="flex items-center justify-center px-3">
-                    <span className="text-neutral-500 dark:text-neutral-200 mt-2">
-                        Pay $123456
-                    </span>
+                    <NavLink to={"/checkout"}>
+                        <span className="text-neutral-500 dark:text-neutral-200 mt-2">
+                            Pay $123456
+                        </span></NavLink>
                 </div>
             </nav>
         </>

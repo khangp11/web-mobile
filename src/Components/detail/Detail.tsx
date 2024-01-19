@@ -446,12 +446,12 @@ const Detail = () => {
             <div id="targetLocation" className='border-2 bg-slate-50 rounded shadow-2xl m-4'>
                 <div className='m-4'>
                     <p>Ratings and Reviews</p>
-                    <div className='flex mr-2'>
-                        <StarRating rating={4} />334
+                    <div className='flex items-center mr-2'>
+                        <StarRating rating={4} />
+                        <p>123</p>
                     </div>
                     <p>Rated 3.5 out of 5</p>
                 </div>
-
                 <div className='m-4'>
                     <div className="rating-list flex items-center">
                         <div className="rating-list-left text-sm">5 Star</div>
