@@ -68,7 +68,7 @@ const Footer = () => {
                             <p className='mr-1'>Trending</p>
                         </NavLink>
                     </span>
-                    <div className='absolute ml-36'>
+                    <div className='absolute ml-36 flex'>
                         <NavLink
                             to="/cart"
                             className={({ isActive, isPending }) =>

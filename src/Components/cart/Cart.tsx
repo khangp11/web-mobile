@@ -48,6 +48,18 @@ const Cart = () => {
     console.log('123', cartList);
 
 
+    let itemTotal = 0;
+    let restaurantCharges = 0;
+    let deliveryFee = 10;
+    let totalDiscount = 1884;
+
+    cartList.forEach((cart) => {
+        itemTotal += cart.price * cart.quantity;
+
+        restaurantCharges += 0.1 * itemTotal;
+    });
+    const totalPage = itemTotal + restaurantCharges + deliveryFee - totalDiscount;
+
     return (
         <>
             <header>
@@ -77,28 +89,31 @@ const Cart = () => {
                 </div>
             </header> <br /><br /><br />
 
-            {cartList && cartList?.map((cart, index) => {
-                return (
-                    <div className='shadow-2xl border-2 m-1 bg-white'>
-                        <div className="box-border w-82 p-4 border-4 m-0 flex items-center">
-                            <p className="flex-1">{cart.food_name}</p>
-                            <button onClick={() => handleIncreaseAmount(cart, cart.quantity)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                </svg>
-                            </button>
-                            <input type="text items-center" value={cart.quantity} className="w-10 px-2 py-1" />
-                            <button onClick={() => handleDecreaseAmount(cart, cart.quantity, index)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
-                                </svg>
-                            </button>
-                            <p className="text-gray-500 mb-0 float-right ml-4 ">{cart.price}$</p>
-                            <button className='ml-2' onClick={() => { handleDeleteItem(index) }}>X</button>
+            {cartList && cartList?.map((cart, index) => (
+                <div className='bg-white' key={index}>
+                    <div className="w-82 p-4 flex items-center justify-between border-b border-gray-400">
+                        <div className="flex items-center">
+                            <p className="flex-1 text-sm">{cart.food_name}</p>
+                        </div>
+                        <div className="flex items-center">
+                            <p className="mr-4">${cart.price}</p>
+                            <div className="flex items-center space-x-2">
+                                <button className='border-2 text-black px-2 py-1 rounded hover:bg-gray-200 transition duration-300 ease-in-out' onClick={() => handleIncreaseAmount(cart, cart.quantity)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </button>
+                                <input type="text" value={cart.quantity} readOnly className="w-10 px-2 py-1 text-center border border-gray-400 bg-gray-400" />
+                                <button className='border-2 text-black px-2 py-1 rounded hover:bg-gray-200 transition duration-300 ease-in-out' onClick={() => handleDecreaseAmount(cart, cart.quantity, index)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                )
-            })};
+                </div>
+            ))}
 
             <div className='shadow-2xl border-1 m-2'>
                 <div className="flex items-center m-2">
@@ -117,34 +132,34 @@ const Cart = () => {
                 </div>
             </div>
 
-            <div className='shadow-2xl border-2 m-2'>
-                <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
-                    <p className="flex-1">Item total</p>
-                    <p className="text-gray-500 mb-0 float-right ml-4 ">$3140</p>
-                </div>
-                <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
-                    <p className="flex-1">Restaurant Charges</p>
-                    <p className="text-gray-500 mb-0 float-right ml-4 ">$62.8</p>
-                </div>
-                <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
-                    <p className="flex-1">Delivery Fee</p>
-                    <p className="text-gray-500 mb-0 float-right ml-4 ">10$</p>
-                </div>
-                <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
-                    <p className="flex-1 text-blue-500">Total Discount</p>
-                    <p className="text-blue-500 mb-0 float-right ml-4 ">1884$</p>
-                </div>
-                <hr />
-                <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
-                    <p className="flex-1"><b>Total page</b></p>
-                    <p className="text-dark-500 mb-0 float-right ml-4 "><b>$1329</b></p>
-                </div>
+            <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
+                <p className="flex-1">Item total</p>
+                <p className="text-gray-500 mb-0 float-right ml-4">${itemTotal}</p>
             </div>
+            <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
+                <p className="flex-1">Restaurant Charges</p>
+                <p className="text-gray-500 mb-0 float-right ml-4">${restaurantCharges}</p>
+            </div>
+            <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
+                <p className="flex-1">Delivery Fee</p>
+                <p className="text-gray-500 mb-0 float-right ml-4">${deliveryFee}</p>
+            </div>
+            <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
+                <p className="flex-1 text-blue-500">Total Discount</p>
+                <p className="text-blue-500 mb-0 float-right ml-4">${totalDiscount}</p>
+            </div>
+            <hr />
+            <div className="box-border w-82 p-0 border-0 m-2 flex items-center">
+                <p className="flex-1"><b>Total page</b></p>
+                <p className="text-dark-500 mb-0 float-right ml-4 "><b>${totalPage.toFixed()}</b></p>
+            </div>
+
+
             <br /><br />
             <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 bg-lime-600 lg:py-4 h-12 ">
                 <div className="flex items-center justify-center px-3">
                     <NavLink to={"/checkout"}>
-                        <span className="text-neutral-500 dark:text-neutral-200 mt-2">
+                        <span className="mt-2 text-white">
                             Pay $123456
                         </span></NavLink>
                 </div>

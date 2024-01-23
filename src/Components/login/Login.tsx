@@ -30,7 +30,7 @@ const Login = () => {
 
     return (
         <>
-            <div className="flex items-center justify-center bg-black">
+            <div className="flex items-center justify-center bg-black ">
                 <div className="relative w-full">
                     <div className="bg-black">
                         <video

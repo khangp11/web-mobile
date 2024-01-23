@@ -116,7 +116,7 @@ const SwiperTrending = () => {
                                 <div className='h-9 grid grid-cols-3 gap-6 content-start m-2'>
                                     <span className='bg-red-700 rounded-lg text-sm text-slate-50 m-1'>OFFER</span>
                                     <samp className='text-sm m-1'>Oshahan50</samp>
-                                    <button className='bg-slate-800 text-white rounded-md ml-6' onClick={() => { handleAddToCart(food) }}>Add</button>
+                                    <button className='bg-gray-400 text-white rounded-md ml-6' onClick={() => { handleAddToCart(food) }}>Add</button>
                                 </div>
                             </div>
                         </div>

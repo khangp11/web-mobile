@@ -15,6 +15,10 @@ export const Checkuot = () => {
     const [showcashdelivery, setShowcashdelivery] = useState(false);
     const [showaddnewaddress, setshowaddnewaddress] = useState(false);
 
+    const [addressPay, setaddressPay] = useState('');
+
+
+
     useEffect(() => {
         const start = () => {
             getCart()
@@ -51,16 +55,16 @@ export const Checkuot = () => {
     const addnewaddress = () => {
         setshowaddnewaddress(!showaddnewaddress)
     };
-
     const toggleCheckbox = () => {
-        setIsChecked(!isChecked);
+        setaddressPay("4904");
         setIsCheckedhome(false);
+        setIsChecked(!isChecked);
     };
     const toggleCheckboxHome = () => {
+        setaddressPay("4904 Goldner Ranch, Jawaddi kalan, punjab, 141013");
         setIsCheckedhome(!isCheckedhome);
         setIsChecked(false);
     };
-
     const togglePaymentInfo = () => {
         setShowPaymentInfo(!showPaymentInfo);
         setShowbanking(false);
@@ -76,6 +80,13 @@ export const Checkuot = () => {
         setShowPaymentInfo(false);
         setShowbanking(false);
     };
+    const total = cartList.reduce((accumulator, cart) => accumulator + cart.quantity * cart.price, 0);
+    const onclickpay = () => {
+        console.log("user1");
+        console.log(addressPay);
+        console.log(total)
+    }
+
     return (
         <>
             {isNavVisible && <div className="overlay fixed top-0 left-0 w-full h-full bg-black opacity-60 z-10" onClick={toggleNav}></div>}
@@ -171,9 +182,9 @@ export const Checkuot = () => {
                 <div className='flex justify-center mt-2'>
                     <div className='border-2 bg-slate-50 rounded shadow-2xl w-11/12'>
                         <h6 className='m-2 font-bold'>DELIVERY ADDRESS</h6>
-                        <div className='flex justify-center'>
+                        <div onClick={toggleCheckboxHome} className='flex justify-center'>
                             <div className='flex justify-between border-2 border-orange-200 w-11/12'>
-                                <div onClick={toggleCheckboxHome} className='flex items-center text-basic ml-2'>
+                                <div className='flex items-center text-basic ml-2'>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                                     </svg>
@@ -188,15 +199,15 @@ export const Checkuot = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='flex justify-center mt-2'>
+                        <div onClick={toggleCheckbox} className='flex justify-center mt-2'>
                             <div className='flex justify-between border-2 border-orange-200 w-11/12'>
-                                <div onClick={toggleCheckbox} className='flex items-center text-basic m-1 ml-2'>
+                                <div className='flex items-center text-basic m-1 ml-2'>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" />
                                     </svg>
                                     <div className='m-2 '>
                                         <p className='font-bold'>Work</p>
-                                        <h6 className='text-xs'>4904 Goldner Ranch, Jawaddi kalan, punjab, 141013</h6>
+                                        <h6 className='text-xs'>4904</h6>
                                     </div>
                                 </div>
                                 <div className='flex items-center px-2'>
@@ -497,13 +508,15 @@ export const Checkuot = () => {
                 <br /><br /><br />
             </div >
 
-            <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 bg-lime-600 lg:py-4 h-12">
-                <div className="flex items-center justify-center px-3">
-                    <span className="text-white dark:text-neutral-200 mt-2">
-                        Pay ${cartList.reduce((total, cart) => total + cart.quantity * cart.price, 0)}
-                    </span>
-                </div>
-            </nav>
+            <button onClick={onclickpay}>
+                <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 bg-lime-600 lg:py-4 h-12">
+                    <div className="flex items-center justify-center px-3">
+                        <span className="text-white dark:text-neutral-200 mt-2">
+                            Pay ${total}
+                        </span>
+                    </div>
+                </nav>
+            </button>
         </>
     )
 }

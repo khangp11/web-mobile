@@ -15,6 +15,8 @@ import { Contact } from './Components/detail/Contact';
 import { Checkuot } from './Components/checkout/Checkuot';
 import Delivery from './Components/profile/Delivery';
 import Login from './Components/login/Login';
+import Chat from './Components/chat/Chat';
+
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +32,7 @@ function App() {
           <Route path='checkout' element={<Checkuot />} />
           <Route path='delivery' element={<Delivery />} />
           <Route path='login' element={<Login />} />
+          <Route path='chat' element={<Chat />} />
         </Routes>
       </div>
     </BrowserRouter>
