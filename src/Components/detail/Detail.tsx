@@ -276,14 +276,26 @@ const Detail = () => {
                             </div>
                             <p className='text-base flex m-2'><b>{food.food_name}</b></p>
                             <p className='text-sm mr-1 flex m-2'>{food.description}</p>
-                            <div className='h-9 grid grid-cols-3 gap-6 content-start m-2'>
+                            <div className='h-9 grid grid-cols-3 m-2 '>
                                 <p className='text-sm m-1'>$30 FOR TWO</p>
                             </div>
                         </div>
                     </SwiperSlide>
                 ))}
                 <br />
-            </Swiper> <br />
+            </Swiper>
+
+
+
+
+
+
+
+
+
+
+
+            <br />
             <div className='flex justify-between'>
                 <h1 className='text-2xl ml-2'><Link to={'/trending'}>Menu</Link></h1>
                 <div className='flex px-2 py-1'>
@@ -304,7 +316,7 @@ const Detail = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 9.563C9 9.252 9.252 9 9.563 9h4.874c.311 0 .563.252.563.563v4.874c0 .311-.252.563-.563.563H9.564A.562.562 0 0 1 9 14.437V9.564Z" />
                         </svg>
-                        <p className="flex-1 text-sm">sản phẩm</p>
+                        <p className="flex-1 text-sm">chân gà</p>
                     </div>
                     <button className='border-2 text-black px-4 py-2 rounded hover:bg-gray-200 transition duration-300 ease-in-out'>
                         Add

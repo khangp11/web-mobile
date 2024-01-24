@@ -6,8 +6,6 @@ const Profile = () => {
     const [showpaymentcard, setshowpaymentcard] = useState(false);
     const [showaddnewaddress, setshowaddnewaddress] = useState(false);
 
-
-
     const payment = () => {
         setshowpaymentcard(!showpaymentcard)
     }
